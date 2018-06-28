@@ -25,10 +25,10 @@ public class Main {
 		config.description="点赞信息表";
 		
 		//包路径
-		config.packageUrl="com.yihao01.campus.cloud.cambase";
+		config.packageUrl="com.yihao01.campus.cloud.campusbase";
 		
 		//mapper,entity生成包目录(当mapper抽出来放在单独的项目中时配置)
-		config.mapperPackageUrl = "com.yihao01.campus.client.cambase";
+		config.mapperPackageUrl = "com.yihao01.campus.client.campusbase";
 		//类名称
 		config.className="School";
 		
