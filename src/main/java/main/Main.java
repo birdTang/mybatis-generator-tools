@@ -19,16 +19,18 @@ public class Main {
 		
 		GeneratorConfig config = new GeneratorConfig();
 		//数据表名
-		config.tableName="wy_praise";
+		config.tableName="school";
 		
 		//类描述
 		config.description="点赞信息表";
 		
 		//包路径
-		config.packageUrl="com.yihao01.campus.cloud.busniee";
+		config.packageUrl="com.yihao01.campus.cloud.cambase";
 		
+		//mapper,entity生成包目录(当mapper抽出来放在单独的项目中时配置)
+		config.mapperPackageUrl = "com.yihao01.campus.client.cambase";
 		//类名称
-		config.className="WyPraise";
+		config.className="School";
 		
 		
 		//是否生成相应模块
@@ -38,6 +40,10 @@ public class Main {
 		config.mapperDaoFlag = YES;
 		config.mapperXmlFlag = YES;
 		
+		//相应模块的entity\mapper\xml是否存在不同项目包下（这里是：mapperPackageUrl下）
+		config.diffEntityFlag = YES;
+		config.diffmapperDaoFlag = YES;
+		config.diffMapperXmlFlag = YES;
 		
 		
 		config.testFlag=NO;

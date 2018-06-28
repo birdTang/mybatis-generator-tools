@@ -25,6 +25,7 @@ public class GeneratorConfig {
 	
 	public String appPath; 	//应用根目录绝对路径
 	public String targetPath; //目标目录绝对路径
+	public String mapperPath; //mapper目录绝对路径
 	/*数据库表、表主键ID类型*/
 	public String tableName;
 	public String tablePKType; // 表主键ID类型
@@ -42,6 +43,9 @@ public class GeneratorConfig {
 	public String entityFlag;
 	public String outFlag;
 	
+	public String diffmapperDaoFlag;
+	public String diffMapperXmlFlag;
+	public String diffEntityFlag;
 	public String testFlag;
 	
 	/**
@@ -53,6 +57,7 @@ public class GeneratorConfig {
 	public String description; // 类描述
 	public String author; // 创建作者
 	public String packageUrl; // 类的包路径
+	public String mapperPackageUrl; // mapper类的包路径
 	public String date;  //创建时间
 
 	public GeneratorConfig() {
@@ -63,6 +68,7 @@ public class GeneratorConfig {
 		
 		appPath = getAppRootPath();
 		targetPath = res.getProperty("gen.targetPath");
+		mapperPath = res.getProperty("gen.mapperPath");
 		controllerFlag = value(res, "gen.controllerFlag", "0");
 		serviceFlag = value(res, "gen.serviceFlag", "0");
 		mapperDaoFlag = value(res, "gen.mapperDaoFlag", "0");

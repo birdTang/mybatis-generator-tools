@@ -4,7 +4,7 @@ package ##{srcPack}##.service;
 import com.yihao01.campus.client.base.ResultData;
 import com.yihao01.campus.client.base.Page;
 import com.yihao01.campus.client.base.service.BaseService;
-import ##{srcPack}##.entity.##{domainObjectName}##;
+import ##{srcEntity}##.entity.##{domainObjectName}##;
 
 /**
  * @Description: ##{description}##

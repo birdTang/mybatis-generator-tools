@@ -17,8 +17,8 @@ import com.yihao01.campus.client.base.mapper.BaseMapper;
 import com.yihao01.campus.client.base.service.impl.BaseServiceImpl;
 import com.yihao01.campus.client.base.ResultData;
 import com.yihao01.campus.client.base.Page;
-import ##{srcPack}##.mapper.##{domainObjectName}##Mapper;
-import ##{srcPack}##.entity.##{domainObjectName}##;
+import ##{srcEntity}##.mapper.##{domainObjectName}##Mapper;
+import ##{srcEntity}##.entity.##{domainObjectName}##;
 import ##{srcPack}##.service.##{domainObjectName}##Service;
 
 /**

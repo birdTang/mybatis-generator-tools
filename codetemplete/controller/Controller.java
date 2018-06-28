@@ -3,7 +3,7 @@ package ##{srcPack}##.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import com.yihao01.campus.client.base.ResultData;
 import com.yihao01.campus.client.base.Page;
 import ##{srcPack}##.service.##{domainObjectName}##Service;
-import ##{srcPack}##.entity.##{domainObjectName}##;
+import ##{srcEntity}##.entity.##{domainObjectName}##;
 
 
 /**
@@ -24,7 +24,7 @@ import ##{srcPack}##.entity.##{domainObjectName}##;
  * @author: ##{author}##
  * @date: ##{date}##
  */
-@Controller
+@RestController
 @RequestMapping("/##{requestMappingName}##")
 public class ##{domainObjectName}##Controller{
 	

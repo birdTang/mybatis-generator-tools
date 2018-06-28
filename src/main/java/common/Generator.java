@@ -51,7 +51,8 @@ public class Generator {
 	private File javaFolder;
 	private String templeteFolder;
 	private Map<String, String> replaceMap;
-	
+	private Map<String,String> diffReplaceMap;
+	private File mapperFolder;
 	
 	private Generator(){
 		
@@ -76,9 +77,12 @@ public class Generator {
 		
 		// 代码文件夹
 		this.javaFolder = this.createJavaCodeFolder();
-
+		//mapper代码文件夹
+		this.mapperFolder = this.createDaoCodeFolder();
 		// 获取数据
 		this.replaceMap = this.getReplaceData();
+		
+		this.diffReplaceMap = this.getDiffReplaceData();
 
 		//替换，生成代码
 		this.createEntity(ENTITY_STRING);
@@ -117,6 +121,65 @@ public class Generator {
 		
 		//包路径
 		replaceMap.put("srcPack", config.packageUrl);
+		//entity包路径
+		if (YES.equals( config.diffEntityFlag)) {
+			replaceMap.put("srcEntity", config.mapperPackageUrl);
+		}else {
+			replaceMap.put("srcEntity", config.packageUrl);
+		}
+		
+		//类信息
+		replaceMap.put("description", config.description);
+		replaceMap.put("author", config.author);
+		replaceMap.put("date", config.date);
+		
+		//表名称
+		replaceMap.put("tableName", config.tableName);
+		
+		//类名称
+		replaceMap.put("domainObjectName", config.className);
+		replaceMap.put("firstLowerDomainObjectName",config.firstLowerClassName);
+		
+		//请求url，controller层@RequestMapping("")
+		replaceMap.put("requestMappingName", config.lowerClassName);
+		
+		//解析数据表列信息
+		TableColumnData tableData = new TableColumnData(conn, config.tableName);
+		//转换数据类型（未完成）
+
+		//获取主键类型
+		config.tablePKType = this.getPrimaryKeyType(tableData);
+		replaceMap.put("tablePrimaryKeyType", config.tablePKType);
+		
+		
+		//设置SQL语句替换信息
+		setSQLData(conn,tableData,replaceMap);
+		
+		replaceMap.put("entityProperty", CreaterEntity.entity(conn, config.tableName));
+
+		conn.close();
+		
+		return replaceMap;
+
+	}
+	
+	/**
+	 * 查询数据库,获取表元数据
+	 * 
+	 * 生成模板替代数据:SQL和类信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	private Map<String, String> getDiffReplaceData() throws Exception {
+
+		// 数据库连接
+		Connection conn = JdbcConnection.getConection();
+		
+		Map<String, String> replaceMap = new HashMap<String, String>();
+		
+		//包路径
+		replaceMap.put("srcPack", config.mapperPackageUrl);
 		
 		//类信息
 		replaceMap.put("description", config.description);
@@ -203,7 +266,10 @@ public class Generator {
 	 * @throws Exception
 	 */
 	private void createEntity(String templeteFilePath) throws Exception {
-		if (YES.equals(config.entityFlag)) {
+		if (YES.equals(config.entityFlag) &&  YES.equals(config.diffEntityFlag)) {
+			this.diffcoreHandle(templeteFilePath, false);
+		}
+		else if (YES.equals(config.entityFlag)) {
 			this.coreHandle(templeteFilePath,false);
 		}
 	}
@@ -215,14 +281,20 @@ public class Generator {
 	}
 
 	private void createMapperXml(String templeteFilePath) throws Exception {
-		if (YES.equals(config.mapperXmlFlag)) {
+		if (YES.equals(config.mapperXmlFlag) &&  YES.equals(config.diffMapperXmlFlag)) {
+			this.diffcoreHandle(templeteFilePath, true);
+		}
+		else if (YES.equals(config.mapperXmlFlag)) {
 			this.coreHandle(templeteFilePath);
 		}
 	}
 	
 
 	private void createDao(String templeteFilePath) throws Exception {
-		if (YES.equals(config.mapperDaoFlag)) {
+		if (YES.equals(config.mapperDaoFlag) &&  YES.equals(config.diffmapperDaoFlag)) {
+			this.diffcoreHandle(templeteFilePath, true);
+		}
+		else if (YES.equals(config.mapperDaoFlag)) {
 			this.coreHandle(templeteFilePath);
 		}
 	}
@@ -285,6 +357,43 @@ public class Generator {
 		
 	}
 	
+	/**
+	 * 执行步骤：
+	 * 1、根据模板文件相对路径生成代码文件相对路径，保证目录结构一致
+	 * 2、读取模板数据
+	 * 3、替换模板字符串
+	 * 4、生成目标类文件
+	 * 5、保持到目标文件
+	 * @param templeteFilePath
+	 * @param isEndName 是否使用模板名称拼接
+	 * @throws Exception
+	 */
+	private void diffcoreHandle(String templeteFilePath,boolean isEndName) throws Exception {
+		
+		//1、生成目录结构路径
+		File templeteFile = new File(this.templeteFolder+templeteFilePath);
+		File temp = new File(this.mapperFolder.toString() + templeteFilePath);
+		String filename = config.className;
+		if(isEndName){
+			filename += temp.getName();
+		}else {
+			filename +=temp.getName().substring(temp.getName().lastIndexOf("."));
+		}
+		String javaFilePath = temp.toString().replace(temp.getName(), filename);
+		
+		System.out.println("类型:"+templeteFile.getName());
+		System.out.println("模板文件:"+templeteFile.toString());
+		System.out.println("代码文件:"+javaFilePath);
+		System.out.println("-----------------------------");
+		
+		//2、读取模板，替换字符串，保持代码到目标文件
+		String templateFileContext = NewIOUtil.readeFile(templeteFile.toString(), "UTF-8").toString();
+		String outContent = executeReplace(templateFileContext, this.diffReplaceMap);
+		File javaFile = FileUtil.createFileAndFolder(javaFilePath);
+		FileUtil.writeFile(javaFile.toString(), outContent);
+		
+	}
+	
 
 	/**
 	 * 替换字符串,设置配置规则
@@ -318,6 +427,9 @@ public class Generator {
 		return FileUtil.createFolder(config.targetPath + FSP + config.javaPath.replace("/", FSP) + FSP + config.packageUrl.replace(".", FSP));
 	}
 
+	private File createDaoCodeFolder() {
+		return FileUtil.createFolder(config.mapperPath + FSP + config.javaPath.replace("/", FSP) + FSP + config.mapperPackageUrl.replace(".", FSP));
+	}
 	/**
 	 * 获取主键类型
 	 * @param tableData
