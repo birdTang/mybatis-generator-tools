@@ -50,12 +50,12 @@
     	</where>
   	</delete>
 	
-	<select id="findById" parameterType="java.lang.##{tablePrimaryKeyType}##" resultType="##{srcPack}##.entity.##{domainObjectName}##">
+	<select id="findById" parameterType="java.lang.##{tablePrimaryKeyType}##" resultMap="baseResultMap">
 		##{find}##
 		where a.Id=#{id}	
 	</select>
 
-	<select id="findListByMap" parameterType="java.util.Map" resultType="##{srcPack}##.entity.##{domainObjectName}##">
+	<select id="findListByMap" parameterType="java.util.Map" resultMap="baseResultMap">
 		
 		##{find}##
 		
@@ -65,7 +65,7 @@
 
 	</select>
 	
-	<select id="list" parameterType="java.util.Map" resultType="##{srcPack}##.entity.##{domainObjectName}##">
+	<select id="list" parameterType="java.util.Map" resultMap="baseResultMap">
 		
 		
 		##{find}##
@@ -83,7 +83,7 @@
 		
 	</select>
 	
-	<select id="findOneByMap" parameterType="java.util.Map" resultType="##{srcPack}##.entity.##{domainObjectName}##">
+	<select id="findOneByMap" parameterType="java.util.Map" resultMap="baseResultMap">
 		##{find}##
 		<where>
 		
