@@ -90,5 +90,12 @@
 		</where>
 		limit 1
 	</select>
+	
+	<select id="findCountByMap" parameterType="java.util.Map" resultType="java.lang.Integer">
+		##{count_*}##
+		<where>
+		
+		</where>
+	</select>
 </mapper>
 	
