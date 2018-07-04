@@ -250,6 +250,7 @@ public class Generator {
 		
 		//3、查找语句
 		replaceMap.put("find", SqlCreaterSelect.find(tableData));
+		replaceMap.put("findWithIf", SqlCreaterSelect.findWithIf(tableData));
 		//4、删除语句
 		replaceMap.put("delete", "delete from " + config.tableName + " ");
 		//5、统计语句
