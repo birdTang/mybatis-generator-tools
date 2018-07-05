@@ -145,7 +145,7 @@ public class SqlCreaterInsert {
 		sb.append("\t\t)\n");
 		sb.append("\t\tvalues\t\n");
 
-		sb.append("\t\t<foreach collection=\"entitys\" index=\"index\" item=\"item\" separator=\",\" >\n");
+		sb.append("\t\t<foreach collection=\"list\" index=\"index\" item=\"item\" separator=\",\" >\n");
 		sb.append("\t\t(\n");
 		
 		for (ColumnEntity en : columns) {
@@ -188,7 +188,7 @@ public class SqlCreaterInsert {
 		sb.append("\t\t</trim>\t\n");
 		sb.append("\t\tvalues\t\n");
 
-		sb.append("\t\t<foreach collection=\"entitys\" index=\"index\" item=\"item\"  separator=\",\"  >\n");
+		sb.append("\t\t<foreach collection=\"list\" index=\"index\" item=\"item\"  separator=\",\"  >\n");
 		sb.append("\t\t<trim prefix=\"(\" suffix=\")\" suffixOverrides=\",\" >\n");
 		
 		for (ColumnEntity en : columns) {
