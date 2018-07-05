@@ -24,7 +24,7 @@ public class SqlCreaterSelect  {
 		StringBuffer sb=new StringBuffer();
 		
 		sb.append("\t\t\n");
-		sb.append("\t\tselect  \t\n");
+//		sb.append("\t\tselect  \t\n");
 		
 		List<ColumnEntity> columns = table.getColumnList();
 		
@@ -33,7 +33,7 @@ public class SqlCreaterSelect  {
 		}
 		sb.delete(sb.length() - 2, sb.length());
 		
-		sb.append("\n\t\tfrom "+table.getTableName()+" a"+"\t\n");
+//		sb.append("\n\t\tfrom "+table.getTableName()+" a"+"\t\n");
 		
 		return sb.toString();
 	}
@@ -42,8 +42,8 @@ public class SqlCreaterSelect  {
 		
 		StringBuffer sb=new StringBuffer();
 
-		sb.append("<where> \t\n");
-		
+//		sb.append("<where> \t\n");
+		sb.append("\t\n");
 		List<ColumnEntity> columns = table.getColumnList();
 		
 		for (ColumnEntity en : columns) {
@@ -53,7 +53,7 @@ public class SqlCreaterSelect  {
 			sb.append("\t\t\t<if test=\" "+StringUtil.lineToHump(en.getName())+"!=null \">\t\n");
 			sb.append("\t\t\t\t AND a."+en.getName()+"=#{"+StringUtil.lineToHump(en.getName())+"}\t\n\t\t\t</if>\t\n");
 		}
-		sb.append("\t\t</where>\t\n");
+//		sb.append("\t\t</where>\t\n");
 		return sb.toString();
 	}
 	
