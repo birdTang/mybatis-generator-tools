@@ -57,12 +57,14 @@
 	<select id="findById" parameterType="java.lang.##{tablePrimaryKeyType}##" resultMap="baseResultMap">
 		select
 		<include refid="Base_Columns" />
+		FROM ##{tableName}## 
 		where a.Id=#{id}	
 	</select>
 
 	<select id="findListByParam" parameterType="##{srcPack}##.entity.##{domainObjectName}##" resultMap="baseResultMap">
 		select
 		<include refid="Base_Columns" />
+		FROM ##{tableName}## 
 		where 1=1
 		<include refid="Where_Condition" />
 
@@ -71,6 +73,7 @@
 	<select id="findOneByParam" parameterType="##{srcPack}##.entity.##{domainObjectName}##" resultMap="baseResultMap">
 		select
 		<include refid="Base_Columns" />
+		FROM ##{tableName}##
 		where 1=1
 		<include refid="Where_Condition" />
 		limit 1

@@ -256,6 +256,7 @@ public class Generator {
 		//5、统计语句
 		replaceMap.put("count_*", "SELECT COUNT(*) from " + config.tableName + " a");
 		
+		replaceMap.put("tableName", config.tableName + " a");
 		//6、逻辑删除语句
 //		replaceMap.put("logicDelete", "update "+config.tableName+" set status1 = '-1' ");
 		
