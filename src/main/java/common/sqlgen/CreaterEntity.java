@@ -104,7 +104,8 @@ public class CreaterEntity {
 			return "long";
 		} else if (sqlType.equalsIgnoreCase("varchar")) {
 			return "String";
-		} else if (sqlType.toLowerCase().endsWith("int")) {
+		} else if (sqlType.toLowerCase().startsWith("int") || sqlType.toLowerCase().startsWith("tinyint") || 
+				sqlType.toLowerCase().startsWith("smallint")) {
 //			if (key.toLowerCase().endsWith("_code") || key.toLowerCase().endsWith("_id")
 //					|| key.toLowerCase().equals("id"))
 				return "Integer";

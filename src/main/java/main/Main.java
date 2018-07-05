@@ -19,23 +19,23 @@ public class Main {
 		
 		GeneratorConfig config = new GeneratorConfig();
 		//数据表名
-		config.tableName="school";
+		config.tableName="school_staff";
 		
 		//类描述
-		config.description="点赞信息表";
+		config.description="班级信息";
 		
 		//包路径
-		config.packageUrl="com.yihao01.campus.cloud.campusbase";
+		config.packageUrl="com.yihao01.campus.center";
 		
 		//mapper,entity生成包目录(当mapper抽出来放在单独的项目中时配置)
 		config.mapperPackageUrl = "com.yihao01.campus.client.campusbase";
 		//类名称
-		config.className="School";
+		config.className="SchoolStaff";
 		
 		
 		//是否生成相应模块
-		config.controllerFlag = YES;
-		config.serviceFlag = YES;
+		config.controllerFlag = NO;
+		config.serviceFlag = NO;
 		config.entityFlag = YES;
 		config.mapperDaoFlag = YES;
 		config.mapperXmlFlag = YES;
