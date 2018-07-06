@@ -50,7 +50,8 @@ public class SqlCreaterSelect  {
 			
 			// 若为主键且自动增长，若是则不生成该列
 			if (en.isPrimaryKey()) continue;
-			sb.append("\t\t\t<if test=\" "+StringUtil.lineToHump(en.getName())+"!=null \">\t\n");
+			sb.append("\t\t\t<if test=\" "+StringUtil.lineToHump(en.getName())+"!=null and "+
+					StringUtil.lineToHump(en.getName())+" !='' \">\t\n");
 			sb.append("\t\t\t\t AND a."+en.getName()+"=#{"+StringUtil.lineToHump(en.getName())+"}\t\n\t\t\t</if>\t\n");
 		}
 //		sb.append("\t\t</where>\t\n");

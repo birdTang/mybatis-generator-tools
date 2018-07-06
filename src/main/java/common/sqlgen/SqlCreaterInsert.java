@@ -94,7 +94,8 @@ public class SqlCreaterInsert {
 			// 若为主键且自动增长，若是则不生成该列
 			if (en.isPrimaryKey() && en.isAutoInctement()) continue;
 			
-			sb.append("\t\t\t<if test=\" " + StringUtil.lineToHump(en.getName().toLowerCase()) + "!=null \">\t\n");
+			sb.append("\t\t\t<if test=\" " + StringUtil.lineToHump(en.getName().toLowerCase()) + "!=null and "+
+					StringUtil.lineToHump(en.getName().toLowerCase())+"!=''  \">\t\n");
 			sb.append("\t\t\t\t" + en.getName() + ",\t\n\t\t\t</if>\t\n");
 		}
 		sb.append("\t\t</trim>\t\n");
@@ -107,7 +108,8 @@ public class SqlCreaterInsert {
 			// 若为主键且自动增长，若是则不生成该列
 			if (en.isPrimaryKey() && en.isAutoInctement()) continue;
 			
-			sb.append("\t\t\t<if test=\" " + StringUtil.lineToHump(en.getName().toLowerCase()) + "!=null \">\t\n");
+			sb.append("\t\t\t<if test=\" " + StringUtil.lineToHump(en.getName().toLowerCase()) + "!=null and "+
+					StringUtil.lineToHump(en.getName().toLowerCase())+"!='' \">\t\n");
 			sb.append("\t\t\t\t#{" + StringUtil.lineToHump(en.getName().toLowerCase()) + "},\t\n\t\t\t</if>\t\n");
 		}
 		sb.append("\t\t</trim>\t\n");
@@ -182,7 +184,8 @@ public class SqlCreaterInsert {
 			// 若为主键且自动增长，若是则不生成该列
 			if (en.isPrimaryKey() && en.isAutoInctement()) continue;
 			
-			sb.append("\t\t\t<if test=\" " + StringUtil.lineToHump(en.getName().toLowerCase()) + "!=null \">\t\n");
+			sb.append("\t\t\t<if test=\" " + StringUtil.lineToHump(en.getName().toLowerCase()) + "!=null and "+
+					StringUtil.lineToHump(en.getName().toLowerCase())+" !='' \">\t\n");
 			sb.append("\t\t\t\t" + en.getName() + ",\t\n\t\t\t</if>\t\n");
 		}
 		sb.append("\t\t</trim>\t\n");
@@ -196,7 +199,8 @@ public class SqlCreaterInsert {
 			// 若为主键且自动增长，若是则不生成该列
 			if (en.isPrimaryKey() && en.isAutoInctement()) continue;
 			
-			sb.append("\t\t\t<if test=\" " + StringUtil.lineToHump(en.getName().toLowerCase()) + "!=null \">\t\n");
+			sb.append("\t\t\t<if test=\" " + StringUtil.lineToHump(en.getName().toLowerCase()) + "!=null and "+
+					StringUtil.lineToHump(en.getName().toLowerCase())+" !='' \">\t\n");
 			sb.append("\t\t\t#{item." + StringUtil.lineToHump(en.getName().toLowerCase()) + "},\t\n\t\t\t</if>\t\n");
 		}
 		sb.append("\t\t</trim>\t\n");
