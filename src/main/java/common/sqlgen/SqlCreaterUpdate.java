@@ -60,8 +60,15 @@ public class SqlCreaterUpdate  {
 			
 			// 若为主键且自动增长，若是则不生成该列
 			if (en.isPrimaryKey()) continue;
-			sb.append("\t\t\t<if test=\" "+StringUtil.lineToHump(en.getName())+"!=null and "+
-					StringUtil.lineToHump(en.getName())+" !='' \">\t\n");
+			if (en.getTypeName().toLowerCase().startsWith("date") ||en.getTypeName().toLowerCase().startsWith("time") 
+					|| en.getTypeName().toLowerCase().endsWith("int") 
+					|| en.getTypeName().toLowerCase().startsWith("double")) {
+				sb.append("\t\t\t<if test=\" " + StringUtil.lineToHump(en.getName().toLowerCase()) + "!=null \">\t\n");
+			}else {
+				sb.append("\t\t\t<if test=\" "+StringUtil.lineToHump(en.getName())+"!=null and "+
+						StringUtil.lineToHump(en.getName())+" !='' \">\t\n");
+			}
+			
 			sb.append("\t\t\t\t"+en.getName()+"=#{"+StringUtil.lineToHump(en.getName())+"},\t\n\t\t\t</if>\t\n");
 		}
 		sb.append("\t\t</set>\t\n");
@@ -116,9 +123,14 @@ public class SqlCreaterUpdate  {
 			
 			// 若为主键且自动增长，若是则不生成该列
 			if (en.isPrimaryKey()) continue;
-
-			sb.append("\t\t\t<if test=\" "+StringUtil.lineToHump(en.getName())+"!=null and "+
-					StringUtil.lineToHump(en.getName())+" !='' \">\t\n");
+			if (en.getTypeName().toLowerCase().startsWith("date") ||en.getTypeName().toLowerCase().startsWith("time") 
+					|| en.getTypeName().toLowerCase().endsWith("int") 
+					|| en.getTypeName().toLowerCase().startsWith("double")) {
+				sb.append("\t\t\t<if test=\" " + StringUtil.lineToHump(en.getName().toLowerCase()) + "!=null \">\t\n");
+			}else {
+				sb.append("\t\t\t<if test=\" "+StringUtil.lineToHump(en.getName())+"!=null and "+
+						StringUtil.lineToHump(en.getName())+" !='' \">\t\n");
+			}
 			sb.append("\t\t\t\t"+en.getName()+"=#{"+StringUtil.lineToHump(en.getName())+"},\t\n\t\t\t</if>\t\n");
 		}
 
