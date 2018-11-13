@@ -18,8 +18,6 @@ public interface BaseMapper<T, PK> {
 	  
 	  int insertBatch(Map<String, Object> paramMap);
 
-	  int insertBatchWithIf(Map<String, Object> paramMap);
-	  
 	  int deleteById(PK paramPK);
 
 	  int deleteByIds(PK[] paramArrayOfPK);
@@ -32,11 +30,9 @@ public interface BaseMapper<T, PK> {
 
 	  T findById(PK id);
 	  
-	  T findOneByMap(Map<String, Object> paramMap);
+	  T findOneByParam(T paramT);
 
-	  List<T> findListByMap(Map<String, Object> paramMap);
+	  List<T> findListByParam(T paramT);
 
-	  List<T> list(Map<String, Object> paramMap);
-
-	  int findCountByMap(Map<String, Object> paramMap);
+	  int findCountByParam(T paramT);
 }

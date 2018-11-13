@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import common.GeneratorConfig;
 import common.db.ColumnEntity;
 import common.db.JdbcConnection;
 import common.db.TableColumnData;
@@ -18,7 +17,6 @@ import common.sqlgen.SqlCreaterSelect;
 import common.sqlgen.SqlCreaterUpdate;
 import common.util.FileUtil;
 import common.util.NewIOUtil;
-import common.util.StringUtil;
 
 
 /**

@@ -1,7 +1,6 @@
 package common.base;
 
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -30,16 +29,16 @@ public abstract class BaseServiceImpl<T, PK> implements BaseService<T, PK> {
 		return getMapper().update(obj);
 	}
 
-	public List<T> findListByMap(Map<String, Object> mapSql) {
-		return getMapper().findListByMap(mapSql);
+	public List<T> findListByMap(T paramT) {
+		return getMapper().findListByParam(paramT);
 	}
 
 	public T findById(PK id) {
 		return getMapper().findById(id);
 	}
 	
-	public T findOneByMap(Map<String, Object> paramMap) {
-		return getMapper().findOneByMap(paramMap);
+	public T findOneByMap(T paramT) {
+		return getMapper().findOneByParam(paramT);
 	}
 
 

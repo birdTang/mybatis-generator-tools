@@ -1,7 +1,6 @@
 package common.base;
 
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -22,9 +21,9 @@ public interface BaseService<T, PK> {
 
 	T findById(PK id);
 	
-	T findOneByMap(Map<String, Object> paramMap);
+	T findOneByMap(T paramT);
 	
-	List<T> findListByMap(Map<String, Object> paramMap);
+	List<T> findListByMap(T paramT);
 	
 	
 }
